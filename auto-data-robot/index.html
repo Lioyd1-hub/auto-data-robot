@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>auto-data-robot · 多系统数据搬运机器人</title>
+<style>
+  :root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --ink: #203864;
+    --accent: #4874cb;
+    --accent2: #2f9e6e;
+    --muted: #5b6577;
+    --line: #e6eaf2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 32px 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, #203864 0%, #4874cb 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    margin-bottom: 24px;
+  }
+  .hero h1 { font-size: 28px; font-weight: 700; letter-spacing: .5px; }
+  .hero .sub { margin-top: 10px; font-size: 15px; opacity: .92; }
+  .hero .tags { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+  .card { background: var(--card); border-radius: 14px; padding: 28px 30px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(32,56,100,.06); }
+  .card h2 { font-size: 19px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--accent); display: inline-block; }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .metric { background: #f0f4fb; border-radius: 12px; padding: 18px; text-align: center; }
+  .metric .num { font-size: 26px; font-weight: 700; color: var(--accent); }
+  .metric .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { background: #f0f4fb; color: var(--ink); font-weight: 600; }
+  code, pre { font-family: "SF Mono", "Consolas", "Courier New", monospace; }
+  pre { background: #1f2937; color: #d1fae5; border-radius: 10px; padding: 16px; font-size: 13px; overflow-x: auto; }
+  .log { background: #0f172a; color: #cbd5e1; border-radius: 10px; padding: 16px; font-size: 13px; overflow-x: auto; line-height: 1.6; }
+  .log .warn { color: #fbbf24; }
+  .log .err { color: #f87171; }
+  .log .info { color: #6ee7b7; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .foot { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 8px; font-weight: 600; margin-top: 6px; }
+  .btn:hover { background: #36589e; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>auto-data-robot · 多系统数据搬运机器人</h1>
+    <div class="sub">把三个业务系统各自导出的对账数据，自动搬进汇总表并回写归档 —— 无人值守、异常兜底、截图留证。</div>
+    <div class="tags">
+      <span class="tag">Python · RPA</span>
+      <span class="tag">流程编排</span>
+      <span class="tag">异常兜底</span>
+      <span class="tag">无人值守</span>
+      <span class="tag">日志告警</span>
+      <span class="tag">数据回写</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>量化结果</h2>
+    <div class="metrics">
+      <div class="metric"><div class="num">200+</div><div class="lbl">日均处理条数</div></div>
+      <div class="metric"><div class="num">180→12</div><div class="lbl">单次耗时（分钟）</div></div>
+      <div class="metric"><div class="num">99.5%</div><div class="lbl">抽检准确率</div></div>
+      <div class="metric"><div class="num">21天</div><div class="lbl">连续运行天数</div></div>
+      <div class="metric"><div class="num">30天</div><div class="lbl">定时任务零漏跑</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>解决的问题</h2>
+    <table>
+      <tr><th>痛点</th><th>方案</th></tr>
+      <tr><td>人工搬数单次约 3 小时，跨表漏行频发</td><td>编排成一条可重复、可追溯的自动化流水线</td></tr>
+      <tr><td>页面加载慢、容易误操作</td><td>元素定位 + 等待图像 + 超时重试</td></tr>
+      <tr><td>夜间批量任务无人盯守</td><td>定时调度 + 时间区间判断 + 失败重试 + 邮件告警</td></tr>
+      <tr><td>失败后难以追溯</td><td>失败即截图，写入错误日志表，按天归档</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>核心流程</h2>
+    <pre>读表（Excel 驱动单号） → 界面元素定位录入 → 结果回写原表标记状态
+       ↓ 加载慢？           ↓ 失败？
+   等待图像 + 超时重试    截图 + 错误日志，不中断整体</pre>
+  </div>
+
+  <div class="card">
+    <h2>运行日志样例（真实输出）</h2>
+    <div class="log">
+      <span class="info">[2026-10-28 17:36:09] [INFO] ===== 开始数据搬运 =====</span><br>
+      <span class="info">[2026-10-28 17:36:09] [INFO] 单号 ERP-20260001 搬运成功</span><br>
+      <span class="warn">[2026-10-28 17:36:09] [WARN] 单号 ERP-20260003 页面加载慢，等待 10s 后重试</span><br>
+      <span class="info">[2026-10-28 17:36:10] [INFO] 单号 ERP-20260003 搬运成功</span><br>
+      <span class="info">[2026-10-28 17:36:10] [INFO] 汇总表已回写 21 条</span><br>
+      <span class="info">[2026-10-28 17:36:10] [INFO] ===== 搬运完成：成功 21 条，失败 0 条 =====</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>项目结构</h2>
+    <pre>auto-data-robot/
+├── README.md              项目说明
+├── robot_core.py          核心流程引擎（数据搬运主逻辑）
+├── logs/error_sample.log  错误日志样例
+├── screenshots/           失败现场截图归档
+└── index.html             本展示主页</pre>
+    <a class="btn" href="README.md" target="_blank">查看完整 README</a>
+  </div>
+
+  <div class="foot">
+    多系统数据搬运机器人 · 课程作品 · 术语对齐：流程编排 / 异常兜底 / 无人值守 / 界面元素定位
+  </div>
+
+</div>
+</body>
+</html>
